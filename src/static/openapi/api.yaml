@@ -1,0 +1,61 @@
+openapi: 3.0.2
+info:
+  title: Store interface
+  description: This interface provides registration store msg
+  version: 0.1.9
+servers:
+  - url: '{protocol}://{server}:{port}'
+    description: Optional server description, e.g. Main (production) server
+paths:
+  "/msg":
+      post:
+          tags:
+            - MsgGetter
+          operationId: "get Messages by"
+          summary: get Message
+          description: Send Message on Correction
+          requestBody:
+            $ref: '#/components/requestBodies/MessageDto'
+
+          responses:
+            '200':
+              description: Msg
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/MessageDto"
+components:
+  requestBodies:
+    MessageDto:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageDto'
+            examples:
+              eventParametersExample:
+                $ref: '#/components/examples/MessageDto'
+        required: true
+        description: Event creation parameters
+
+  schemas:
+    MessageDto: # Schema name
+      type: object
+      properties:
+        author:
+          type: string
+        message:
+          type: string
+        dateAndTime:
+          type: string
+      example: # Object-level example
+        login: BigBOy
+        password: Terminator111
+  examples:
+    MessageDto:
+      value:
+        author: BigBOy
+        message: My password Terminator111
+        dateAndTime: 2021-08-04 09:36:57
+
