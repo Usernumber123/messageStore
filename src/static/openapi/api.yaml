@@ -51,6 +51,8 @@ components:
           type: string
         message:
           type: string
+        age:
+          type: integer
         dateAndTime:
           type: string
       example: # Object-level example

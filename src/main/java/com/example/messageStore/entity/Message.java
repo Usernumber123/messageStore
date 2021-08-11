@@ -26,4 +26,6 @@ public class Message {
     private String censoredMessage;
     @Column(name = "date_and_time")
     private String dateAndTime;
+    @Column(name = "age")
+    private Integer age;
 }

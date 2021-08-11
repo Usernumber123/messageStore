@@ -16,6 +16,7 @@
             <column name="message" type="VARCHAR(255)"/>
             <column name="censored_message" type="VARCHAR(255)"/>
             <column name="date_and_time" type="VARCHAR(255)"/>
+            <column name="age" type="INT" />
         </createTable>
         <createTable tableName="users">
             <column autoIncrement="true" name="id" type="BIGINT">
@@ -25,6 +26,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="role" type="VARCHAR(255)"/>
+            <column name="age" type="INT" />
         </createTable>
         <rollback>
             <dropTable tableName="messages"/>

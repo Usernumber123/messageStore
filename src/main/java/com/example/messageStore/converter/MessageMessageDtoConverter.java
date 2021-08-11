@@ -15,6 +15,7 @@ public class MessageMessageDtoConverter implements Converter<Message, MessageDto
         MessageDto messageDto = new MessageDto();
         messageDto.setMessage(message.getCensoredMessage());
         messageDto.setDateAndTime(message.getDateAndTime());
+        messageDto.setAge(message.getAge());
         messageDto.setAuthor(message.getAuthor());
         return messageDto;
     }

@@ -23,8 +23,8 @@ class MessageRepositoryTest {
 
     @Test
     void findAllSpec() {
-        Message message1=Message.builder().message("Author1").censoredMessage("smf").dateAndTime("2021-08-05 10:42:45").author("author").build();
-        Message message2=Message.builder().message("Author2").censoredMessage("smf").dateAndTime("2021-08-05 10:42:45").author("author").build();
+        Message message1=Message.builder().message("Author1").censoredMessage("smf").age(12).dateAndTime("2021-08-05 10:42:45").author("author").build();
+        Message message2=Message.builder().message("Author2").censoredMessage("smf").age(12).dateAndTime("2021-08-05 10:42:45").author("author").build();
         entityManager.persist(message1);
         entityManager.persist(message2);
         entityManager.flush();

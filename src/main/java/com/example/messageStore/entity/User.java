@@ -33,6 +33,8 @@ public class User {
     @JoinColumn(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "age")
+    private Integer age;
     @Column(name = "role")
     private String Role="USER";
 
