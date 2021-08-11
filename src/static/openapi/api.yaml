@@ -14,8 +14,12 @@ paths:
           operationId: "get Messages by"
           summary: get Message
           description: Send Message on Correction
-          requestBody:
-            $ref: '#/components/requestBodies/MessageDto'
+          parameters:
+            - name: filter
+              in: query
+              description: Filter param
+              schema:
+                type: string
 
           responses:
             '200':

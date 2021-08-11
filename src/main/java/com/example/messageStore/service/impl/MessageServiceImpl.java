@@ -25,21 +25,20 @@ public class MessageServiceImpl implements MessageService {
     private final ConversionService conversionService;
 
 
-    public List<MessageDto> msgRead(MessageDto messageDto) {
-       Message message = conversionService.convert(messageDto,Message.class);
-        List<Message> messages =msgFilter(message);
+    public List<MessageDto> msgRead(String filter) {
+        List<Message> messages =msgFilter(filter);
         
         List<MessageDto> messageDtos = new ArrayList<>();
         for (Message message1 : messages)
             messageDtos.add(conversionService.convert(message1, MessageDto.class));
         return messageDtos;
     }
-    private List<Message> msgFilter(Message message){
+    private List<Message> msgFilter(String filter){
 //        UserDetailsImpl principal = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         MessageSpecificationsBuilder builder = new MessageSpecificationsBuilder();
         Pattern pattern = Pattern.compile("(or )?(\\w+?) (:|<|>) (\\w+?(-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2})?),");
-        Matcher matcher = pattern.matcher( message.getMessage()+",");
+        Matcher matcher = pattern.matcher( filter+",");
         while (matcher.find()) {
             builder.with(matcher.group(2), matcher.group(3), matcher.group(4),matcher.group(1)!=null);
         }
@@ -48,5 +47,6 @@ public class MessageServiceImpl implements MessageService {
        return messageRepository.findAll(spec);
 
     }
+
 
 }
