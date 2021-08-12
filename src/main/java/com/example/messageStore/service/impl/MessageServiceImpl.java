@@ -3,13 +3,11 @@ package com.example.messageStore.service.impl;
 import com.example.messageStore.entity.Message;
 import com.example.messageStore.model.MessageDto;
 import com.example.messageStore.repository.MessageRepository;
-import com.example.messageStore.security.UserDetailsImpl;
 import com.example.messageStore.service.MessageService;
 import com.example.messageStore.service.impl.specifications.MessageSpecificationsBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,8 +27,9 @@ public class MessageServiceImpl implements MessageService {
         List<Message> messages =msgFilter(filter);
         
         List<MessageDto> messageDtos = new ArrayList<>();
-        for (Message message1 : messages)
+        for (Message message1 : messages) {
             messageDtos.add(conversionService.convert(message1, MessageDto.class));
+        }
         return messageDtos;
     }
     private List<Message> msgFilter(String filter){

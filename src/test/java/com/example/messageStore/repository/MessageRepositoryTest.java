@@ -23,12 +23,19 @@ class MessageRepositoryTest {
 
     @Test
     void findAllSpec() {
-        Message message1=Message.builder().message("Author1").censoredMessage("smf").age(12).dateAndTime("2021-08-05 10:42:45").author("author").build();
-        Message message2=Message.builder().message("Author2").censoredMessage("smf").age(12).dateAndTime("2021-08-05 10:42:45").author("author").build();
+        Message message1=Message.builder().message("MsgAuthor1").censoredMessage("smf").age(12).dateAndTime("2021-08-05 10:42:47").author("Author1").build();
+        Message message2=Message.builder().message("MsgAuthor2").censoredMessage("smf").age(12).dateAndTime("2021-08-05 10:42:45").author("Author2").build();
         entityManager.persist(message1);
         entityManager.persist(message2);
         entityManager.flush();
         List<Message> found = messageRepository.findAll();
+        assertSame(found.size(),2);
+        List<Message> found1 = messageRepository.findAllByUserLogin("Author1");
+        assertSame(found1.size(),1);
+        List<Message> found2 = messageRepository.getAllMessagesAfterDate("2021-08-05 10:42:46");
+        assertSame(found2.size(),1);
+        List<Message> found3 = messageRepository.getAllMessagesBeforeDate("2021-08-05 10:42:46");
+        assertSame(found2.size(),1);
 
 
     }
