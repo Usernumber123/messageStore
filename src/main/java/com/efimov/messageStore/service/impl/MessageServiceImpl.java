@@ -109,8 +109,6 @@ public class MessageServiceImpl implements MessageService {
             return response.getStatusCode().equals(HttpStatus.OK);
         } catch (HttpClientErrorException e) {
             return false;
-        } catch (Exception e) {
-            return false;
         }
     }
 
