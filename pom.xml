@@ -8,7 +8,7 @@
 		<version>2.5.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
+	<groupId>com.efimov</groupId>
 	<artifactId>messageStore</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>messageStore</name>
@@ -101,7 +101,23 @@
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin.external.google</groupId>
+			<artifactId>android-json</artifactId>
+			<version>0.0.20131108.vaadin1</version>
+			<scope>compile</scope>
+		</dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
 
 
 	<build>
@@ -134,8 +150,8 @@
 							<inputSpec>${project.basedir}/src/static/openapi/api.yaml</inputSpec>
 							<output>${project.build.directory}/generated-sources/openapi</output>
 							<generatorName>spring</generatorName>
-							<apiPackage>com.example.messageStore.api</apiPackage>
-							<modelPackage>com.example.messageStore.model</modelPackage>
+							<apiPackage>com.efimov.messageStore.api</apiPackage>
+							<modelPackage>com.efimov.messageStore.model</modelPackage>
 							<generateApiTests>false</generateApiTests>
 							<generateModelTests>false</generateModelTests>
 							<configOptions>

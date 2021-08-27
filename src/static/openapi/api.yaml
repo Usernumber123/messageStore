@@ -11,13 +11,18 @@ paths:
       post:
           tags:
             - MsgGetter
-          operationId: "get Messages by"
+          operationId: "message selection by"
           summary: get Message
           description: Send Message on Correction
           parameters:
             - name: filter
               in: query
               description: Filter param
+              schema:
+                type: string
+            - name: chat
+              in: query
+              description: chat of user
               schema:
                 type: string
 
@@ -55,7 +60,7 @@ components:
           type: integer
         dateAndTime:
           type: string
-      example: # Object-level example
+      example: # Object-level efimov
         login: BigBOy
         password: Terminator111
   examples:
