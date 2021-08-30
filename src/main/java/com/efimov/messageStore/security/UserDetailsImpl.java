@@ -19,7 +19,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String userRole=user.getRole();
+        String userRole = user.getRole();
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole);
         return Collections.singletonList(authority);
     }
@@ -54,7 +54,7 @@ public class UserDetailsImpl implements UserDetails {
         return !user.getLogin().equals("DELETED_USER");
     }//
 
-    public User getUser(){
+    public User getUser() {
         return user;
     }
 }

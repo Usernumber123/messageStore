@@ -6,6 +6,7 @@ import org.springframework.data.jpa.domain.Specification;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 public class MessageSpecificationsBuilder {
     private final List<SearchCriteria> params;
 
@@ -13,8 +14,8 @@ public class MessageSpecificationsBuilder {
         params = new ArrayList<SearchCriteria>();
     }
 
-    public MessageSpecificationsBuilder with(String key, String operation, Object value,Boolean orPredicate) {
-        params.add(new SearchCriteria(key , operation, value,orPredicate));
+    public MessageSpecificationsBuilder with(String key, String operation, Object value, Boolean orPredicate) {
+        params.add(new SearchCriteria(key, operation, value, orPredicate));
         return this;
     }
 

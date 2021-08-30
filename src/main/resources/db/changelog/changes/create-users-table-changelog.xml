@@ -15,7 +15,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="role" type="VARCHAR(255)"/>
-            <column name="age" type="INT" />
+            <column name="age" type="INT"/>
         </createTable>
         <rollback>
             <dropTable tableName="messages"/>

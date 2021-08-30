@@ -2,7 +2,7 @@ package com.efimov.messageStore.controller;
 
 import com.efimov.messageStore.api.MsgGetterApi;
 import com.efimov.messageStore.model.MessageDto;
-import com.efimov.messageStore.service.MessageService;
+import com.efimov.messageStore.service.MessagesSelectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +13,10 @@ import java.util.List;
 @RestController
 public class MessagesSelectionController implements MsgGetterApi {
     @Autowired
-    MessageService getMessageService;
+    MessagesSelectionService messagesSelectionService;
 
     @Override
     public ResponseEntity<List<MessageDto>> messageSelectionBy(String filter, String chat) {
-        return new ResponseEntity<>(getMessageService.messageSelectionBy(chat,filter), HttpStatus.OK);
+        return new ResponseEntity<>(messagesSelectionService.messageSelectionBy(chat, filter), HttpStatus.OK);
     }
 }

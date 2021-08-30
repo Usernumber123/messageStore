@@ -38,6 +38,6 @@ public class User {
     @Column(name = "age")
     private Integer age;
     @Column(name = "role")
-    private String Role="USER";
+    private String Role = "USER";
 
 }

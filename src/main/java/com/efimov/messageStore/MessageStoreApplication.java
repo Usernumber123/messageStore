@@ -9,8 +9,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableConfigurationProperties({ApplicationProperties.class})
 public class MessageStoreApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MessageStoreApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MessageStoreApplication.class, args);
+    }
 
 }

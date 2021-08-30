@@ -31,18 +31,18 @@ public class DbConfig {
     public HikariConfig hikariConfig(ApplicationProperties applicationProperties) {
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl(applicationProperties.getHikari().getJdbcUrl());
-      //  hikariConfig.setConnectionTimeout(applicationProperties.getHikari().getConnectionTimeout());
-      //  hikariConfig.setIdleTimeout(applicationProperties.getHikari().getIdleTimeout());
-      //  hikariConfig.setMaxLifetime(applicationProperties.getHikari().getMaxLifetime());
+        //  hikariConfig.setConnectionTimeout(applicationProperties.getHikari().getConnectionTimeout());
+        //  hikariConfig.setIdleTimeout(applicationProperties.getHikari().getIdleTimeout());
+        //  hikariConfig.setMaxLifetime(applicationProperties.getHikari().getMaxLifetime());
         hikariConfig.setDriverClassName(applicationProperties.getHikari().getDriverClassName());
         hikariConfig.setUsername(applicationProperties.getDatabase().getUsername());
 
 
         hikariConfig.setPassword(applicationProperties.getDatabase().getPassword());
-      //  hikariConfig.setReadOnly(applicationProperties.getHikari().isReadOnly());
-       // hikariConfig.setMinimumIdle(applicationProperties.getHikari().getPoolSize());
-       // hikariConfig.setMaximumPoolSize(applicationProperties.getHikari().getPoolSize());
-       // hikariConfig.setAutoCommit(false);
+        //  hikariConfig.setReadOnly(applicationProperties.getHikari().isReadOnly());
+        // hikariConfig.setMinimumIdle(applicationProperties.getHikari().getPoolSize());
+        // hikariConfig.setMaximumPoolSize(applicationProperties.getHikari().getPoolSize());
+        // hikariConfig.setAutoCommit(false);
 
         return hikariConfig;
     }

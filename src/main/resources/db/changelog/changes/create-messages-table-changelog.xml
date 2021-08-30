@@ -20,7 +20,7 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="age" type="INT" />
+            <column name="age" type="INT"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

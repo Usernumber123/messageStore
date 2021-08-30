@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-@ContextConfiguration(classes= MessageStoreApplication.class)
+@ContextConfiguration(classes = MessageStoreApplication.class)
 class MessageRepositoryTest {
     public static final String MSG_AUTHOR_1 = "MsgAuthor1";
     public static final String MSG_AUTHOR_2 = "MsgAuthor2";
@@ -32,19 +32,19 @@ class MessageRepositoryTest {
 
     @Test
     void findAllSpec() {
-        Message message1=Message.builder().message(MSG_AUTHOR_1).censoredMessage(SMF).age(AGE).dateAndTime(DATE_AND_TIME).author(AUTHOR_1).build();
-        Message message2=Message.builder().message(MSG_AUTHOR_2).censoredMessage(SMF).age(AGE).dateAndTime(DATE_AND_TIME1).author(AUTHOR_2).build();
+        Message message1 = Message.builder().message(MSG_AUTHOR_1).censoredMessage(SMF).age(AGE).dateAndTime(DATE_AND_TIME).author(AUTHOR_1).build();
+        Message message2 = Message.builder().message(MSG_AUTHOR_2).censoredMessage(SMF).age(AGE).dateAndTime(DATE_AND_TIME1).author(AUTHOR_2).build();
         entityManager.persist(message1);
         entityManager.persist(message2);
         entityManager.flush();
         List<Message> found = messageRepository.findAll();
-        assertSame(found.size(),2);
+        assertSame(found.size(), 2);
         List<Message> found1 = messageRepository.findAllByUserLogin(AUTHOR_1);
-        assertSame(found1.size(),1);
+        assertSame(found1.size(), 1);
         List<Message> found2 = messageRepository.getAllMessagesAfterDate(DATE_1);
-        assertSame(found2.size(),1);
+        assertSame(found2.size(), 1);
         List<Message> found3 = messageRepository.getAllMessagesBeforeDate(DATE_1);
-        assertSame(found2.size(),1);
+        assertSame(found2.size(), 1);
 
 
     }

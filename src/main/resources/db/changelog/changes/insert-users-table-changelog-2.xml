@@ -9,8 +9,8 @@
         <insert tableName="users">
             <column name="id" value="1"/>
             <column name="login" value="admin"/>
-            <column name="role" value="ADMIN" />
-            <column name="age" value="100" />
+            <column name="role" value="ADMIN"/>
+            <column name="age" value="100"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

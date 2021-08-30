@@ -12,7 +12,6 @@ public class JwtTokenService {
     private static final String secret = "SecretKey";
 
 
-
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }

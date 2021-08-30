@@ -22,9 +22,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return new UserDetailsImpl(userRepository.findOneByLogin(login)
                 .orElseThrow(IllegalArgumentException::new));
     }
+
     @KafkaListener(id = "5", topics = "auth")
     public void addUsers(ConsumerRecord<String, Object> messageReceived) {
-       User user=new Gson().fromJson(messageReceived.value().toString(), User.class);
-       userRepository.save(user);
+        User user = new Gson().fromJson(messageReceived.value().toString(), User.class);
+        userRepository.save(user);
     }
 }

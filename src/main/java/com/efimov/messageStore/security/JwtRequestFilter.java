@@ -1,4 +1,5 @@
 package com.efimov.messageStore.security;
+
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.val;
@@ -19,17 +20,18 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 public class JwtRequestFilter extends OncePerRequestFilter {
     private final JwtTokenService jwtTokenService;
     private final UserDetailsServiceImpl userDetailsService;
+
     @Override
     @SneakyThrows
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) {
         String tokenHeaderValue = httpServletRequest.getHeader(AUTHORIZATION);
-        String username ;
-        String jwtToken ;
+        String username;
+        String jwtToken;
         if (tokenHeaderValue != null && tokenHeaderValue.startsWith("Bearer ")) {
             jwtToken = tokenHeaderValue.substring(7);
             username = jwtTokenService.getUsernameFromToken(jwtToken);
             val context = SecurityContextHolder.getContext();
-           if (username != null && context.getAuthentication() == null) {
+            if (username != null && context.getAuthentication() == null) {
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 val usernamePasswordAuthenticationToken =

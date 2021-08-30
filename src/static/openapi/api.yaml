@@ -8,45 +8,45 @@ servers:
     description: Optional server description, e.g. Main (production) server
 paths:
   "/msg":
-      post:
-          tags:
-            - MsgGetter
-          operationId: "message selection by"
-          summary: get Message
-          description: Send Message on Correction
-          parameters:
-            - name: filter
-              in: query
-              description: Filter param
-              schema:
-                type: string
-            - name: chat
-              in: query
-              description: chat of user
-              schema:
-                type: string
+    post:
+      tags:
+        - MsgGetter
+      operationId: "message selection by"
+      summary: get Message
+      description: Send Message on Correction
+      parameters:
+        - name: filter
+          in: query
+          description: Filter param
+          schema:
+            type: string
+        - name: chat
+          in: query
+          description: chat of user
+          schema:
+            type: string
 
-          responses:
-            '200':
-              description: Msg
-              content:
-                application/json:
-                  schema:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/MessageDto"
+      responses:
+        '200':
+          description: Msg
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MessageDto"
 components:
   requestBodies:
     MessageDto:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MessageDto'
-            examples:
-              eventParametersExample:
-                $ref: '#/components/examples/MessageDto'
-        required: true
-        description: Event creation parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MessageDto'
+          examples:
+            eventParametersExample:
+              $ref: '#/components/examples/MessageDto'
+      required: true
+      description: Event creation parameters
 
   schemas:
     MessageDto: # Schema name
@@ -60,6 +60,8 @@ components:
           type: integer
         dateAndTime:
           type: string
+      required:
+        - message
       example: # Object-level efimov
         login: BigBOy
         password: Terminator111

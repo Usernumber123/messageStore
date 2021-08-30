@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import com.efimov.messageStore.entity.Message;
 import com.efimov.messageStore.model.MessageDto;
 import com.efimov.messageStore.repository.MessageRepository;
-import com.efimov.messageStore.service.MessageService;
+import com.efimov.messageStore.service.MessagesSelectionService;
 import com.efimov.messageStore.service.impl.specifications.MessageSpecificationsBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class MessageServiceImpl implements MessageService {
+public class MessagesSelectionServiceImpl implements MessagesSelectionService {
 
     public static final String AUTHORIZATION = "Authorization";
     public static final String CHAT_NAME = "chatName";
@@ -43,7 +43,7 @@ public class MessageServiceImpl implements MessageService {
     public static final String ADMIN = "admin";
     private final MessageRepository messageRepository;
     private final ConversionService conversionService;
-    private final   RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     @SneakyThrows
     @Override
@@ -60,7 +60,7 @@ public class MessageServiceImpl implements MessageService {
             }
             return messageDtos;
         } else {
-          throw new ChatNotFoundException("User does not have this chat");
+            throw new ChatNotFoundException("User does not have this chat");
         }
     }
 
@@ -76,34 +76,28 @@ public class MessageServiceImpl implements MessageService {
         return messageRepository.findAll(spec);
 
     }
+
     @SneakyThrows
     private boolean verificationByRest(String chat) {
         UserDetailsImpl principal = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-
-        String OrchestratorUrl
-                = "http://localhost:8081/checkChat";
-        String OrchestratorUrlGetToken
-                = "http://localhost:8081/token";
-
+        String OrchestratorUrl = "http://localhost:8081/checkChat";
+        String OrchestratorUrlGetToken = "http://localhost:8081/token";
         JSONObject personJsonObject = new JSONObject();
         personJsonObject.put(LOGIN, ADMIN);
         personJsonObject.put(PASSWORD, ADMIN);
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(OrchestratorUrl)
                 .queryParam(CHAT_NAME, chat)
                 .queryParam(USER_LOGIN, principal.getUser().getLogin());
-        HttpEntity entity = new HttpEntity(headers);
 
         HttpEntity<String> request =
                 new HttpEntity<>(personJsonObject.toString(), headers);
 
         String adminToken =
                 restTemplate.postForObject(OrchestratorUrlGetToken, request, String.class);
-        headers.set(AUTHORIZATION, "Bearer " + adminToken );
+        HttpEntity entity = new HttpEntity(headers);
+        headers.set(AUTHORIZATION, "Bearer " + adminToken);
         try {
             ResponseEntity<String> response = restTemplate.exchange(uriBuilder.toUriString(), HttpMethod.GET, entity, String.class);
             return response.getStatusCode().equals(HttpStatus.OK);
