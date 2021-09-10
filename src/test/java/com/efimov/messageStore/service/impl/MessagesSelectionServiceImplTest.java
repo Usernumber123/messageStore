@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -41,8 +42,7 @@ class MessagesSelectionServiceImplTest {
     Authentication authentication = Mockito.mock(Authentication.class);
     public ConversionService conversionService = mock(ConversionService.class);
     private final RestTemplate restTemplate = mock(RestTemplate.class);
-
-    private final MessagesSelectionServiceImpl messageService = new MessagesSelectionServiceImpl(messageRepository, conversionService, restTemplate);
+    private final MessagesSelectionServiceImpl messageService = new MessagesSelectionServiceImpl( conversionService,messageRepository, restTemplate);
 
     @Test
     @SneakyThrows
@@ -60,6 +60,7 @@ class MessagesSelectionServiceImplTest {
         when(restTemplate.postForObject(anyString(), any(), eq(String.class))).thenReturn("");
         Mockito.when(authentication.getPrincipal()).thenReturn((UserDetailsImpl) principal);
         Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
+        ReflectionTestUtils.setField(messageService, "ORCHESTRATOR_URL", "http://localhost:8082/msg");
         SecurityContextHolder.setContext(securityContext);
 
         List<MessageDto> findMsgs = messageService.messageSelectionBy(chat, filter);

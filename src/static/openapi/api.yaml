@@ -8,7 +8,7 @@ servers:
     description: Optional server description, e.g. Main (production) server
 paths:
   "/msg":
-    post:
+    get:
       tags:
         - MsgGetter
       operationId: "message selection by"
@@ -23,6 +23,12 @@ paths:
         - name: chat
           in: query
           description: chat of user
+          schema:
+            type: string
+        - name: rights
+          in: query
+          description: hostOruser rigths
+          required: true
           schema:
             type: string
 
